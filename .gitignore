@@ -154,3 +154,8 @@ gradle-app.setting
 .DS_Store
 Thumbs.db
 android/libs/
+
+## modules build dir
+
+/annotations/build
+/main/build
