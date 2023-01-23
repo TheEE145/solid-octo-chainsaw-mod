@@ -21,7 +21,7 @@ import com.squareup.javapoet.*;
  * from GlennFolker/Mindustry-ModTemplate
  * @author GlennFolker
  */
-@SupportedAnnotationTypes("org.jetbrains.annotations.NotNull")
+@SupportedAnnotationTypes("octo.annotations.Mod")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class AssetsProcessor extends AbstractProcessor {
     private Fi assetsDir;
@@ -116,6 +116,7 @@ public class AssetsProcessor extends AbstractProcessor {
                                 .addStatement("return null")
                                 .build()
                 );
+
         MethodSpec.Builder load = MethodSpec.methodBuilder("load").addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                 .addJavadoc("Loads all {@link $T}s.", ctype)
                 .returns(TypeName.VOID);
@@ -126,10 +127,14 @@ public class AssetsProcessor extends AbstractProcessor {
 
         String dir = "assets/sounds/";
         assetsDir.child("sounds").walk(path -> {
+            Log.info(path);
+            //if((path + "/").endsWith(dir)) {
+            //    return;
+            //}
+
             String p = path.absolutePath();
             String name = p.substring(p.lastIndexOf(dir) + dir.length());
             String fname = path.nameWithoutExtension();
-            int ex = 4;
 
             soundSpec.addField(
                     FieldSpec.builder(
@@ -140,7 +145,7 @@ public class AssetsProcessor extends AbstractProcessor {
                             .build()
             );
 
-            String stripped = name.substring(0, name.length() - ex);
+            String stripped = name.substring(0, name.length() - 4);
             load.addStatement("$L = loadSound($S)", Strings.kebabToCamel(fname), stripped);
             dispose.addStatement("$L = disposeSound($S)", Strings.kebabToCamel(fname), stripped);
         });

@@ -5,12 +5,12 @@ import arc.util.*;
 import mindustry.ui.dialogs.*;
 import mindustry.game.EventType.*;
 
+import octo.annotations.Mod;
 import octo.gen.ModSounds;
 import octo.util.Regions;
 
-import org.jetbrains.annotations.NotNull;
-
-public @NotNull class Octo extends mindustry.mod.Mod {
+@Mod(prefix = "octo", name = "octo-chainsaw")
+public class Octo extends mindustry.mod.Mod {
     public Octo() {
         Log.info("Loaded Octo constructor.");
 
