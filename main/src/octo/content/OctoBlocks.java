@@ -57,6 +57,7 @@ public class OctoBlocks {
 
         octoMatWall = new OctoWall("octo-mat-wall") {{
             this.jointsEnabled = true;
+            this.squareSprite = false;
             this.health = 575;
 
             this.requirements(Category.defense, ItemStack.with(
