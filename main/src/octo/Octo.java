@@ -9,8 +9,7 @@ import octo.annotations.Mod;
 import octo.gen.ModSounds;
 import octo.util.Regions;
 
-@Mod(prefix = "octo", name = "octo-chainsaw")
-public class Octo extends mindustry.mod.Mod {
+public @Mod class Octo extends mindustry.mod.Mod {
     public Octo() {
         Log.info("Loaded Octo constructor.");
 
