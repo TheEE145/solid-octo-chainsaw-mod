@@ -33,6 +33,10 @@ public class Regions {
         return errorRegion;
     }
 
+    public static boolean hasRegion(String prefix) {
+        return Core.atlas.has(prefix) || Core.atlas.has("octo-" + prefix);
+    }
+
     public static @NotNull TextureRegion getRegion(String prefix) {
         if(StringUtils.isEmpty(prefix) || prefix.equals("error")) {
             return errorRegion();

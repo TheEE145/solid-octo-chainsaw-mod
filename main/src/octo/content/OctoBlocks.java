@@ -43,7 +43,9 @@ public class OctoBlocks {
             }};
 
             this.consumePower(2);
-            this.requirements(Category.turret, ItemStack.empty);
+            this.requirements(Category.turret, ItemStack.with(
+                    OctoItems.octoMat, 24
+            ));
         }};
 
         //end turrets
