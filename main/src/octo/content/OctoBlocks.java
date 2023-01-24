@@ -13,11 +13,15 @@ import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.blocks.defense.turrets.Turret;
 import octo.gen.ModSounds;
+import octo.world.OctoWall;
 
 public class OctoBlocks {
     public @SuppressWarnings("unused") static Block
             //turrets
             octoChar,
+
+            //walls
+            octoMatWall,
     end;
 
     public static void load() {
@@ -49,5 +53,17 @@ public class OctoBlocks {
         }};
 
         //end turrets
+        //region walls
+
+        octoMatWall = new OctoWall("octo-mat-wall") {{
+            this.jointsEnabled = true;
+            this.health = 575;
+
+            this.requirements(Category.defense, ItemStack.with(
+                    OctoItems.octoMat, 6
+            ));
+        }};
+
+        //end walls
     }
 }

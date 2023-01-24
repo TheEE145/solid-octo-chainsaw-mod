@@ -19,7 +19,7 @@ public class OctoItems {
     public static void loadAnimated() {
         octoMat.fullIcon = octoMat.uiIcon = AnimatedTextureRegion.load(octoMat.name, reg -> {
             reg.updateNext();
-            reg.maxTick++;
+            reg.maxTick += 2;
         });
     }
 }
