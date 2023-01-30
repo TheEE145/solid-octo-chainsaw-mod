@@ -30,6 +30,7 @@ import mindustry.world.meta.BuildVisibility;
 import octo.gen.ModSounds;
 import octo.util.Regions;
 
+import octo.world.AmplificationTower;
 import octo.world.OctoBlockJoint;
 import octo.world.OctoWall;
 
@@ -97,6 +98,7 @@ public class OctoBlocks {
 
             //defence
             octoSpike,
+            amplificationTower,
 
             //walls
             octoMatWall,
@@ -593,6 +595,15 @@ public class OctoBlocks {
 
             this.requirements(Category.defense, ItemStack.with(
                     OctoItems.octoMat, 7
+            ));
+        }};
+
+        amplificationTower = new AmplificationTower("amplification-tower") {{
+            this.health = 40;
+
+            this.requirements(Category.effect, ItemStack.with(
+                    OctoItems.octoMat, 12,
+                    OctoItems.monolith, 6
             ));
         }};
 

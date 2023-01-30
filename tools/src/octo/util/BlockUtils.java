@@ -1,6 +1,7 @@
 package octo.util;
 
 import arc.struct.Seq;
+import arc.util.Log;
 import mindustry.gen.Building;
 
 import org.jetbrains.annotations.Contract;
@@ -19,7 +20,7 @@ public class BlockUtils {
 
         int tx = building.tileX();
         int ty = building.tileY();
-        int tl = (int) (range / 8);
+        int tl = (int) (range / 4);
 
         for(int x = tx - tl; x < tx + tl; x++) {
             if(x < 0 || x > world.width()) {
