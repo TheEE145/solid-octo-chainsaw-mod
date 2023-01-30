@@ -22,7 +22,7 @@ public class AmplificationTower extends Block {
     public float range = 40;
 
     public int processorSpeed = 2;
-    public int maxStroke = 24;
+    public int maxStroke = 6;
 
     public AmplificationTower(String name) {
         super(name);

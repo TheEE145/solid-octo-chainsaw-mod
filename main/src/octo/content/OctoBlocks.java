@@ -2,10 +2,7 @@ package octo.content;
 
 import arc.graphics.Color;
 
-import mindustry.content.Blocks;
-import mindustry.content.Fx;
-import mindustry.content.Items;
-import mindustry.content.StatusEffects;
+import mindustry.content.*;
 
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.ContinuousFlameBulletType;
@@ -18,13 +15,15 @@ import mindustry.graphics.Pal;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 
+import mindustry.type.LiquidStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.ContinuousLiquidTurret;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.blocks.defense.turrets.Turret;
+import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.storage.CoreBlock;
-import mindustry.world.draw.DrawTurret;
+import mindustry.world.draw.*;
 import mindustry.world.meta.BuildVisibility;
 
 import octo.gen.ModSounds;
@@ -105,6 +104,11 @@ public class OctoBlocks {
 
             //cores
             coreOctogen,
+
+            //crafters
+            soulCollector,
+            soulHardener,
+            soulSmelter,
     end;
 
     public static void fixCoreIcon(Block block) {
@@ -632,5 +636,59 @@ public class OctoBlocks {
         }};
 
         //end cores
+        //region crafters
+
+        soulCollector = new GenericCrafter("soul-collector") {{
+            this.outputItem = new ItemStack(OctoItems.soul, 6);
+            this.consumePower(1);
+            this.size = 3;
+
+            this.craftTime = 120;
+            this.requirements(Category.crafting, ItemStack.with(
+                OctoItems.octoMat, 24
+            ));
+        }};
+
+        soulSmelter = new GenericCrafter("soul-smelter") {{
+            this.outputLiquid = new LiquidStack(OctoItems.soulLiquid, 1);
+            this.consumeItem(OctoItems.soul, 3);
+            this.consumePower(1);
+            this.size = 3;
+
+            this.drawer = new DrawMulti(
+                    new DrawRegion("-bottom"),
+                    new DrawLiquidTile(OctoItems.soulLiquid),
+                    new DrawDefault()
+            );
+
+            this.craftTime = 120;
+            this.liquidCapacity = 120;
+            this.requirements(Category.crafting, ItemStack.with(
+                    OctoItems.octoMat, 24,
+                    OctoItems.soul, 12
+            ));
+        }};
+
+        soulHardener = new GenericCrafter("soul-hardener") {{
+            this.outputItem = new ItemStack(OctoItems.soul, 3);
+            this.consumeLiquid(OctoItems.soulLiquid, 1);
+            this.consumePower(1);
+            this.size = 3;
+
+            this.drawer = new DrawMulti(
+                    new DrawRegion("-bottom"),
+                    new DrawLiquidTile(OctoItems.soulLiquid),
+                    new DrawDefault()
+            );
+
+            this.craftTime = 120;
+            this.liquidCapacity = 120;
+            this.requirements(Category.crafting, ItemStack.with(
+                    OctoItems.octoMat, 24,
+                    OctoItems.soul, 12
+            ));
+        }};
+
+        //end crafters
     }
 }
