@@ -22,7 +22,7 @@ import com.squareup.javapoet.*;
  * @author GlennFolker
  */
 @SupportedAnnotationTypes("octo.annotations.Mod")
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_16)
 public class AssetsProcessor extends AbstractProcessor {
     private Fi assetsDir;
     private Filer filer;

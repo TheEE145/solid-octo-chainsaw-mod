@@ -1,44 +1,43 @@
 package octo;
 
-import arc.*;
-import arc.util.*;
-import mindustry.ui.dialogs.*;
+import octo.content.*;
 import mindustry.game.EventType.*;
 
+import octo.content.modModules.BetamindyDependencyModule;
+import octo.util.depedency.ModDependencyContainer;
+import octo.eventbus.MindustryEventApi;
 import octo.annotations.Mod;
-import octo.content.OctoBlocks;
-import octo.content.OctoItems;
+import octo.gen.IconManager;
 import octo.gen.ModSounds;
-import octo.util.Regions;
 
 public @Mod class Octo extends mindustry.mod.Mod {
+    public static final BetamindyDependencyModule betamindyModule;
+
+    public static final ModDependencyContainer container = new ModDependencyContainer(
+            betamindyModule = new BetamindyDependencyModule()
+    );
+
     public Octo() {
-        Log.info("Loaded Octo constructor.");
+        MindustryEventApi.bus.get(ClientLoadEvent.class)
+                .addEventListener(IconManager::load)
+                .addEventListener(OctoItems::loadAnimated)
+                .addEventListener(OctoStats::post)
+                .addEventListener(OctoUI::loadSettings)
+                .addEventListener(OctoUI::load)
+                .addEventListener(OctoCommands::registerCommands)
+                .addEventListener(this::post);
 
-        Events.on(ClientLoadEvent.class, e -> {
-            //show beta dialog
-            Time.runTask(10f, () -> {
-                BaseDialog dialog = new BaseDialog("@octo.beta");
-
-                dialog.cont.add("@octo.beta.text").row();
-                dialog.cont.image(Regions.getRegion("frog")).pad(20f).row();
-                dialog.cont.button("@confirm", dialog::hide).size(200f, 50f);
-                dialog.show();
-            });
-
-            //load animations
-            OctoItems.loadAnimated();
-        });
-
-        //sounds creation / disposing
-        Events.on(FileTreeInitEvent.class, ignored -> ModSounds.load());
-        Events.on(DisposeEvent.class, ignored -> ModSounds.dispose());
+        MindustryEventApi.bus.get(FileTreeInitEvent.class).addEventListener(ModSounds::load);
+        MindustryEventApi.bus.get(DisposeEvent.class).addEventListener(ModSounds::dispose);
     }
 
     @Override
     public void loadContent() {
-        Log.info("Loading some content.");
+        container.init();
+        container.preload();
 
+        OctoStats.load();
+        OctoStats.loadCountries();
         //ModStatusEffects.load()
         OctoItems.load();
         //ModBullets.load()
@@ -46,6 +45,12 @@ public @Mod class Octo extends mindustry.mod.Mod {
         OctoBlocks.load();
         //ModPlanets.load()
         //ModSectorPresets.load()
-        //ModTechTree.load()
+        OctoTech.load();
+
+        container.loadContent();
+    }
+
+    public void post() {
+        OctoBlocks.fixCoreIcon(OctoBlocks.coreOctogen);
     }
 }

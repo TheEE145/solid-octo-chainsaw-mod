@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class AnimatedTextureRegion extends TextureRegion {
     public TextureRegion[] frames;
-    public int maxTick = 2;
+    public int maxTick = 4;
 
     private int currentFrame = 0;
     private int tick;

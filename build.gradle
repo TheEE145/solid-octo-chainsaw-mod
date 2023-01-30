@@ -27,7 +27,7 @@ allprojects {
 
     tasks.withType(JavaCompile).tap {
         configureEach {
-            options.compilerArgs.addAll(['--release', '8'])
+                options.compilerArgs.addAll(['--release', '16'])
         }
     }
 
@@ -53,6 +53,7 @@ allprojects {
 dependencies {
     implementation project(":main")
     implementation project(":tools")
+    implementation project(":cmdparser")
 }
 
 task jarAndroid {
