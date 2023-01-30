@@ -11,12 +11,15 @@ public class OctoTech {
             node(OctoStats.brazil, () -> {
                 node(OctoItems.octoMat, () -> {
                     node(OctoItems.soul, ItemStack.with(OctoItems.octoMat, 100), () -> {
+                        node(OctoBlocks.soulCollector);
                     });
                 });
             });
 
             node(OctoStats.britany, () -> {
                 node(OctoItems.soulLiquid, ItemStack.with(OctoItems.soul, 200), () -> {
+                    node(OctoBlocks.soulHardener);
+                    node(OctoBlocks.soulSmelter);
                 });
             });
 
