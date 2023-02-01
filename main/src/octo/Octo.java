@@ -1,5 +1,6 @@
 package octo;
 
+import arc.Core;
 import arc.struct.Seq;
 import mindustry.Vars;
 import mindustry.game.EventType.*;
@@ -28,9 +29,9 @@ public @Mod class Octo extends mindustry.mod.Mod {
         Log.info("loading events api");
         MindustryEventApi.bus.get(ClientLoadEvent.class)
                 .addEventListener(IconManager::load)
+                .addEventListener(OctoUI::loadSettings)
                 .addEventListener(OctoItems::loadAnimated)
                 .addEventListener(OctoStats::post)
-                .addEventListener(OctoUI::loadSettings)
                 .addEventListener(OctoUI::load)
                 .addEventListener(OctoCommands::registerCommands)
                 .addEventListener(this::post)
@@ -65,7 +66,10 @@ public @Mod class Octo extends mindustry.mod.Mod {
     }
 
     public void post() {
-        OctoBlocks.fixCoreIcon(OctoBlocks.coreOctogen);
+        if(!Core.settings.getBool("nocoreteams") && !Vars.headless) {
+            OctoBlocks.fixCoreIcon(OctoBlocks.coreOctogen);
+        }
+
         FileFinder.modToSearch = mod = Vars.mods.getMod(this.getClass());
 
         //spoiler there`s not contributors, it`s just borrow and freesound.org

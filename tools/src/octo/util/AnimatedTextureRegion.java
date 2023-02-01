@@ -42,15 +42,19 @@ public class AnimatedTextureRegion extends TextureRegion {
         return reg;
     }
 
+    public void nextFrame() {
+        this.set(this.frames[currentFrame]);
+
+        this.currentFrame++;
+        if(this.currentFrame == this.frames.length) {
+            this.currentFrame = 0;
+        }
+    }
+
     public void update() {
         if(this.frames != null && --this.tick <= 0) {
-            this.set(this.frames[currentFrame]);
             this.tick = maxTick;
-
-            this.currentFrame++;
-            if(this.currentFrame == this.frames.length) {
-                this.currentFrame = 0;
-            }
+            this.nextFrame();
         }
     }
 

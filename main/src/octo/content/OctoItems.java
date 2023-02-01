@@ -1,6 +1,8 @@
 package octo.content;
 
+import arc.Core;
 import arc.graphics.Color;
+import mindustry.Vars;
 import mindustry.content.Items;
 import mindustry.ctype.UnlockableContent;
 import mindustry.graphics.Pal;
@@ -59,12 +61,20 @@ public class OctoItems {
     }
 
     public static void load(UnlockableContent content, int bonusTick) {
-        if(content == null) {
+        if(content == null || Vars.headless) {
             return;
         }
 
-        AnimatedTextureRegion reg = AnimatedTextureRegion.load(content.name).updateNext();
+        AnimatedTextureRegion reg = AnimatedTextureRegion.load(content.name);
         reg.maxTick += bonusTick;
+
+        if(Core.settings.getBool("animitems")) {
+            reg.updateNext();
+        } else {
+            for(int i = 0; i < reg.frames.length / 2; i++) {
+                reg.nextFrame();
+            }
+        }
 
         content.fullIcon = reg;
         content.uiIcon = reg;
