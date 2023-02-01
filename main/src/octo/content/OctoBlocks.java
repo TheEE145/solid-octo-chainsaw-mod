@@ -1,17 +1,11 @@
 package octo.content;
 
-import arc.graphics.Color;
-
 import mindustry.content.*;
 
-import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.bullet.ContinuousFlameBulletType;
-import mindustry.entities.bullet.LaserBoltBulletType;
 import mindustry.entities.pattern.ShootAlternate;
 import mindustry.entities.pattern.ShootHelix;
 
 import mindustry.entities.pattern.ShootSpread;
-import mindustry.graphics.Pal;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 
@@ -30,8 +24,11 @@ import octo.gen.ModSounds;
 import octo.util.Regions;
 
 import octo.world.AmplificationTower;
+import octo.world.IllegalItemSource;
 import octo.world.OctoBlockJoint;
 import octo.world.OctoWall;
+
+import static mindustry.type.ItemStack.with;
 
 public class OctoBlocks {
     public @SuppressWarnings("unused") static Block
@@ -109,6 +106,9 @@ public class OctoBlocks {
             soulCollector,
             soulHardener,
             soulSmelter,
+
+            //illegal
+            illegalItemSource,
     end;
 
     public static void fixCoreIcon(Block block) {
@@ -136,30 +136,9 @@ public class OctoBlocks {
             }};
 
             ammo(
-                    OctoItems.monolith, new BasicBulletType(9, 14) {{
-                        this.status = StatusEffects.disarmed;
-                        this.buildingDamageMultiplier = 0.5f;
-                        this.backColor = this.frontColor = Pal.darkOutline;
-
-                        this.homingPower = 0.75f;
-                        this.homingDelay = 0;
-                    }},
-
-                    OctoItems.soul, new BasicBulletType(4, 10) {{
-                        this.buildingDamageMultiplier = 0.30f;
-                        this.backColor = this.frontColor = Items.titanium.color;
-
-                        this.homingPower = 0.5f;
-                        this.homingDelay = 20;
-                    }},
-
-                    OctoItems.octoMat, new BasicBulletType(6, 7) {{
-                        this.buildingDamageMultiplier = 0.25f;
-                        this.backColor = this.frontColor = Pal.heal;
-
-                        this.homingPower = 0.5f;
-                        this.homingDelay = 30;
-                    }}
+                    OctoItems.monolith, OctoBullets.exodus1monolith,
+                    OctoItems.soul,     OctoBullets.exodus1soul,
+                    OctoItems.octoMat,  OctoBullets.exodus1octomat
             );
 
             requirements(Category.turret, ItemStack.with(
@@ -181,30 +160,9 @@ public class OctoBlocks {
             this.shoot = new ShootAlternate(4);
 
             ammo(
-                    OctoItems.monolith, new BasicBulletType(9, 16) {{
-                        this.status = StatusEffects.disarmed;
-                        this.buildingDamageMultiplier = 0.55f;
-                        this.backColor = this.frontColor = Pal.darkOutline;
-
-                        this.homingPower = 0.75f;
-                        this.homingDelay = 0;
-                    }},
-
-                    OctoItems.soul, new BasicBulletType(4, 12) {{
-                        this.buildingDamageMultiplier = 0.35f;
-                        this.backColor = this.frontColor = Items.titanium.color;
-
-                        this.homingPower = 0.5f;
-                        this.homingDelay = 20;
-                    }},
-
-                    OctoItems.octoMat, new BasicBulletType(6, 9) {{
-                        this.buildingDamageMultiplier = 0.30f;
-                        this.backColor = this.frontColor = Pal.heal;
-
-                        this.homingPower = 0.5f;
-                        this.homingDelay = 30;
-                    }}
+                    OctoItems.monolith, OctoBullets.exodus1monolith,
+                    OctoItems.soul,     OctoBullets.exodus1soul,
+                    OctoItems.octoMat,  OctoBullets.exodus1octomat
             );
 
             requirements(Category.turret, ItemStack.with(
@@ -407,24 +365,7 @@ public class OctoBlocks {
             this.shootEffect = Fx.none;
             this.range = 20 * 8;
 
-            ammo(OctoItems.soulLiquid, new ContinuousFlameBulletType(1624) {{
-                length = 18 * 8;
-
-                knockback = 2f;
-                pierceCap = 3;
-
-                colors = new Color[] {
-                        Color.valueOf("FF795E").a(0.55f),
-                        Color.valueOf("E46B58").a(0.7f),
-                        Color.valueOf("C85C51").a(0.8f),
-                        Color.valueOf("A04553"),
-                        Color.white
-                };
-
-                flareColor = Color.valueOf("F15454");
-                lightColor = hitColor = flareColor;
-            }});
-
+            ammo(OctoItems.soulLiquid, OctoBullets.soulStormShoot);
             this.requirements(Category.turret, ItemStack.empty);
         }};
 
@@ -443,12 +384,7 @@ public class OctoBlocks {
                 this.shots = 3;
             }};
 
-            this.shootType = new LaserBoltBulletType(6, 10) {{
-                this.status = StatusEffects.electrified;
-                this.buildingDamageMultiplier = 0.75f;
-                this.backColor = Color.green;
-                this.frontColor = Pal.heal;
-            }};
+            this.shootType = OctoBullets.octoCharShoot;
 
             this.consumePower(2);
             this.requirements(Category.turret, ItemStack.with(
@@ -561,24 +497,7 @@ public class OctoBlocks {
                 this.shots = 20;
             }};
 
-            this.shootType = new ContinuousFlameBulletType(Float.POSITIVE_INFINITY) {{
-                length = 1000;
-
-                knockback = 2f;
-                pierceCap = 3;
-
-                colors = new Color[] {
-                        Color.valueOf("465ab8").a(0.55f),
-                        Color.valueOf("66a6d2").a(0.7f),
-                        Color.valueOf("89e8b6").a(0.8f),
-                        Color.valueOf("cafcbe"),
-                        Color.white
-                };
-
-                flareColor = Color.valueOf("89e8b6");
-                lightColor = hitColor = flareColor;
-            }};
-
+            this.shootType = OctoBullets.polandLaser;
             this.requirements(Category.turret, ItemStack.with(
                     OctoItems.octoMat,  9999,
                     OctoItems.soul,     9999,
@@ -690,5 +609,13 @@ public class OctoBlocks {
         }};
 
         //end crafters
+        //region illegal
+
+        illegalItemSource = new IllegalItemSource("illegal-item-source") {{
+            this.requirements(Category.distribution, BuildVisibility.sandboxOnly, ItemStack.with());
+            this.alwaysUnlocked = true;
+        }};
+
+        //end illegal
     }
 }

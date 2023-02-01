@@ -1,10 +1,13 @@
 package octo.content;
 
+import arc.graphics.Color;
+import arc.struct.Seq;
 import mindustry.ctype.UnlockableContent;
 import mindustry.gen.Icon;
 import mindustry.ui.dialogs.BaseDialog;
 
 import octo.cmd.CommandDialog;
+import octo.ui.OctoSettingCategory;
 import octo.util.ModIcons;
 import octo.util.Regions;
 
@@ -13,6 +16,8 @@ import arc.util.Time;
 import static mindustry.Vars.*;
 
 public class OctoUI {
+    public static Seq<String> contributors = new Seq<>();
+
     public static void load() {
         Time.runTask(10f, () -> {
             BaseDialog dialog = new BaseDialog("@octo.beta");
@@ -27,8 +32,8 @@ public class OctoUI {
     }
 
     public static void loadSettings() {
-        ui.settings.addCategory("@octogen", ModIcons.mod, table -> {
-            table.button("@alltech", () -> {
+        ui.settings.getCategories().add(new OctoSettingCategory("@octogen", ModIcons.mod, table -> {
+            table.button("@alltech", Icon.list, () -> {
                 BaseDialog baseDialog = new BaseDialog("@warning");
                 baseDialog.cont.add("@warning.text").row();
 
@@ -45,7 +50,20 @@ public class OctoUI {
 
                 baseDialog.buttons.button("@cancel", baseDialog::hide).width(200);
                 baseDialog.show();
-            }).width(300);
-        });
+            }).width(300).pad(3).row();
+
+            table.button("@exit", Icon.left, table::exitFromSettings)
+                    .width(300f).pad(3).row();
+
+            table.resetButton().row();
+            table.exitButton().row();
+
+            table.image().color(Color.gray).growX().height(4).row();
+
+            table.settings(settings -> {
+                settings.checkPref("animitems", true);
+                settings.checkPref("nocoreteams", false);
+            }).padTop(3);
+        }));
     }
 }

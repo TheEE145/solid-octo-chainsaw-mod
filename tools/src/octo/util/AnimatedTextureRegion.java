@@ -7,6 +7,10 @@ import mindustry.game.EventType;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * this region can be animated
+ * @author TheEE145
+ */
 public class AnimatedTextureRegion extends TextureRegion {
     public TextureRegion[] frames;
     public int maxTick = 4;

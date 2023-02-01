@@ -23,23 +23,19 @@ public class ModDependencyContainer {
         this(new Seq<>());
     }
 
+    public Seq<ModDependencyModule> validOnly() {
+        return this.modules.copy().filter(ModDependencyModule::validMod);
+    }
+
     public void init() {
         this.modules.each(ModDependencyModule::init);
     }
 
     public void preload() {
-        this.modules.each(module -> {
-            if(module.validMod()) {
-                module.preload();
-            }
-        });
+        this.validOnly().each(ModDependencyModule::preload);
     }
 
     public void loadContent() {
-        this.modules.each(module -> {
-            if(module.validMod()) {
-                module.loadContent();
-            }
-        });
+        this.validOnly().each(ModDependencyModule::loadContent);
     }
 }

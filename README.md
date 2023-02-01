@@ -1,4 +1,4 @@
-# Solid Octo Chainsaw Mod
+![](assets\sprites\logo.png)
 A modular java mindustry mod that works on PC.
 
 ## Mod dependency support / Java 16 / modules
@@ -9,8 +9,8 @@ and this mod uses java 16+ language level and mod is modular
 modules list: <br>
 | name        | description            | version |
 | ----------- | ---------------------- | ------- |
-| main        | mod main module        | 1.2     |
-| tools       | mod tools              | 1.3     |
+| main        | mod main module        | 1.4     |
+| tools       | mod tools              | 1.6     |
 | cmdparser   | mod shell              | 1.0     |
 | annotations | annotations processing | 1.1     |
 

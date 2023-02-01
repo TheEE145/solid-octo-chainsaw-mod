@@ -1,15 +1,25 @@
 package octo.util;
 
-import arc.struct.Seq;
-import arc.util.Log;
 import mindustry.gen.Building;
+import arc.math.geom.Vec2;
+import arc.struct.Seq;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static mindustry.Vars.*;
 
 public class BlockUtils {
+    @Contract(value = "null -> null", pure = true)
+    public static @Nullable Vec2 to_vec2(Building building) {
+        if(building == null || building.block == null) {
+            return null;
+        }
+
+        return new Vec2(building.x, building.y);
+    }
+
     @Contract("null, _ -> new")
     public static @NotNull Seq<Building> buildingsNearby(Building building, float range) {
         if(building == null || Float.isNaN(range)) {

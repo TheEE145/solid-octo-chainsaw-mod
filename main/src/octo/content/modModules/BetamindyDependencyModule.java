@@ -29,10 +29,7 @@ public class BetamindyDependencyModule extends ModDependencyModule {
     public static Item bittrium;
 
     //end mod
-
-    public BetamindyDependencyModule() {
-        super(null);
-    }
+    //region override
 
     @Override
     public void init() {
@@ -97,4 +94,6 @@ public class BetamindyDependencyModule extends ModDependencyModule {
 
         //end tech
     }
+
+    //end override
 }

@@ -1,5 +1,6 @@
 package octo.util;
 
+import arc.math.geom.Vec2;
 import mindustry.gen.Building;
 import mindustry.world.Tile;
 import org.jetbrains.annotations.Contract;
@@ -33,6 +34,15 @@ public class DefMath {
 
     @Contract("null, _, _ -> false; !null, null, _ -> false")
     public static boolean collision(Building ab1, Building bb2, float radius) {
+        if(ab1 == null || bb2 == null || Float.isNaN(radius)) {
+            return false;
+        }
+
+        return collision(BlockUtils.to_vec2(ab1), BlockUtils.to_vec2(bb2), radius);
+    }
+
+    @Contract("null, _, _ -> false; !null, null, _ -> false")
+    public static boolean collision(Vec2 ab1, Vec2 bb2, float radius) {
         if(ab1 == null || bb2 == null || Float.isNaN(radius)) {
             return false;
         }

@@ -27,6 +27,11 @@ public abstract class ModDependencyModule {
         this.loadedMod = loadedMod;
     }
 
+    @Contract(pure = true)
+    public ModDependencyModule() {
+        this(null);
+    }
+
     public void init() {
     }
 

@@ -43,15 +43,15 @@ public class Country extends UnlockableContent {
         if(this.ways != null && this.ways.size > 0) {
             this.stats.add(OctoStats.interests, (table) -> {
                 table.row();
+
                 table.table(icons -> {
                     icons.left();
+
                     for(Supplier<TextureRegionDrawable> get : this.ways) {
                         TextureRegionDrawable drawable = get.get();
 
-                        icons.image(drawable)
-                                .tooltip(Core.bundle.get("interests." + drawable.getName()))
-                                .width(24f).height(24f)
-                                .pad(6f);
+                        icons.image(drawable).width(24f).height(24f).pad(6f)
+                                .tooltip("@interests." + drawable.getName());
                     }
                 });
             });

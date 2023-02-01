@@ -1,15 +1,21 @@
 package octo.util;
 
 import arc.struct.Seq;
-import mindustry.content.TechTree;
-import mindustry.content.TechTree.TechNode;
-import mindustry.ctype.UnlockableContent;
-import mindustry.game.Objectives;
-import mindustry.game.Objectives.Objective;
-import mindustry.type.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-/* methods from betamindy by sk7725 */
+import mindustry.content.TechTree;
+import mindustry.content.TechTree.TechNode;
+
+import mindustry.game.Objectives;
+import mindustry.game.Objectives.Objective;
+
+import mindustry.type.ItemStack;
+import mindustry.ctype.UnlockableContent;
+
+/**
+ * methods from betamindy by sk7725
+ * @author sk7725
+ */
 public class TechTreeUtils {
     static TechNode context = null;
 
@@ -40,6 +46,10 @@ public class TechTreeUtils {
         node(content, content.researchRequirements(), objectives, children);
     }
 
+    public static void node(UnlockableContent content, Seq<Objective> objectives) {
+        node(content, objectives, () -> {});
+    }
+
     public static void node(UnlockableContent content, Runnable children) {
         node(content, content.researchRequirements(), children);
     }
@@ -59,7 +69,7 @@ public class TechTreeUtils {
         nodeProduce(content, Seq.with(), children);
     }
 
-    public static void nodeProduce(UnlockableContent content){
+    public static void nodeProduce(UnlockableContent content) {
         nodeProduce(content, Seq.with(), () -> {});
     }
 }

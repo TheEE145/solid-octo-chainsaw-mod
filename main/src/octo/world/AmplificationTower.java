@@ -104,6 +104,12 @@ public class AmplificationTower extends Block {
         }
 
         @Override
+        public void drawSelect() {
+            super.drawSelect();
+            this.drawRange();
+        }
+
+        @Override
         public float range() {
             return range;
         }
