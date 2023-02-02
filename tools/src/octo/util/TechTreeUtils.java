@@ -1,6 +1,7 @@
 package octo.util;
 
 import arc.struct.Seq;
+import mindustry.type.Item;
 import org.jetbrains.annotations.NotNull;
 
 import mindustry.content.TechTree;
@@ -24,7 +25,7 @@ public class TechTreeUtils {
         children.run();
     }
 
-    public static void node(UnlockableContent content,
+    public static TechNode node(UnlockableContent content,
                             ItemStack[] requirements,
                             Seq<Objective> objectives,
                             Runnable children)
@@ -36,40 +37,54 @@ public class TechTreeUtils {
         context = node;
         children.run();
         context = prev;
+
+        return node;
     }
 
-    public static void node(UnlockableContent content, ItemStack[] requirements, Runnable children) {
-        node(content, requirements, null, children);
+    public static TechNode node(UnlockableContent content, ItemStack[] requirements, Runnable children) {
+        return node(content, requirements, null, children);
     }
 
-    public static void node(UnlockableContent content, Seq<Objective> objectives, Runnable children) {
-        node(content, content.researchRequirements(), objectives, children);
+    public static TechNode node(UnlockableContent content, Seq<Objective> objectives, Runnable children) {
+        return node(content, content.researchRequirements(), objectives, children);
     }
 
-    public static void node(UnlockableContent content, Seq<Objective> objectives) {
-        node(content, objectives, () -> {});
+    public static TechNode node(UnlockableContent content, Seq<Objective> objectives) {
+        return node(content, objectives, () -> {});
     }
 
-    public static void node(UnlockableContent content, Runnable children) {
-        node(content, content.researchRequirements(), children);
+    public static TechNode node(UnlockableContent content, Runnable children) {
+        return node(content, content.researchRequirements(), children);
     }
 
-    public static void node(UnlockableContent block) {
-        node(block, () -> {});
+    public static TechNode node(UnlockableContent content, ItemStack[] requirements) {
+        return node(content, requirements, () -> {});
     }
 
-    public static void nodeProduce(UnlockableContent content,
+    public static TechNode node(UnlockableContent block) {
+        return node(block, () -> {});
+    }
+
+    public static TechNode nodeProduce(UnlockableContent content,
                                     @NotNull Seq<Objective> objectives,
                                     Runnable children)
     {
-        node(content, content.researchRequirements(), objectives.add(new Objectives.Produce(content)), children);
+        return node(content, content.researchRequirements(), objectives.add(new Objectives.Produce(content)), children);
     }
 
-    public static void nodeProduce(UnlockableContent content, Runnable children){
-        nodeProduce(content, Seq.with(), children);
+    public static TechNode nodeProduce(UnlockableContent content, Runnable children){
+        return nodeProduce(content, Seq.with(), children);
     }
 
-    public static void nodeProduce(UnlockableContent content) {
-        nodeProduce(content, Seq.with(), () -> {});
+    public static TechNode nodeProduce(UnlockableContent content) {
+        return nodeProduce(content, Seq.with(), () -> {});
+    }
+
+    public static @NotNull TechNode nodeRoot(String name, UnlockableContent content, boolean requireUnlock, Runnable children){
+        var root = node(content, content.researchRequirements(), children);
+        root.name = name;
+        root.requiresUnlock = requireUnlock;
+        TechTree.roots.add(root);
+        return root;
     }
 }

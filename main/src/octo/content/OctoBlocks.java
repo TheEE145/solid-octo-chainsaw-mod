@@ -28,8 +28,6 @@ import octo.world.IllegalItemSource;
 import octo.world.OctoBlockJoint;
 import octo.world.OctoWall;
 
-import static mindustry.type.ItemStack.with;
-
 public class OctoBlocks {
     public @SuppressWarnings("unused") static Block
             //turrets
@@ -176,6 +174,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         exodus8 = new ItemTurret("exodus8") {{
@@ -184,6 +184,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         exodus8x = new ItemTurret("exodus8x") {{
@@ -192,6 +194,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         exodus24 = new ItemTurret("exodus24") {{
@@ -200,6 +204,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         exodus56 = new ItemTurret("exodus56") {{
@@ -208,6 +214,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         exodus70 = new ItemTurret("exodus70") {{
@@ -216,6 +224,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         exodus115 = new ItemTurret("exodus115") {{
@@ -224,6 +234,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         illangeist5 = new ItemTurret("illangeist5") {{
@@ -232,6 +244,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         illangeist5x = new ItemTurret("illangeist5x") {{
@@ -240,6 +254,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         illangeist16 = new ItemTurret("illangeist16") {{
@@ -248,6 +264,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         illangeist42 = new ItemTurret("illangeist42") {{
@@ -256,6 +274,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         illangeist42x = new ItemTurret("illangeist42x") {{
@@ -264,6 +284,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         illangeist84 = new ItemTurret("illangeist84") {{
@@ -272,6 +294,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         illangeist112 = new ItemTurret("illangeist112") {{
@@ -280,6 +304,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         monolith135 = new ItemTurret("monolith135") {{
@@ -288,6 +314,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         monolith157 = new ItemTurret("monolith157") {{
@@ -296,6 +324,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         monolith178 = new ItemTurret("monolith178") {{
@@ -304,6 +334,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         monolith194 = new ItemTurret("monolith194") {{
@@ -312,6 +344,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         monolith203 = new ItemTurret("monolith203") {{
@@ -320,6 +354,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         monolith233 = new ItemTurret("monolith233") {{
@@ -328,6 +364,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         object70 = new ItemTurret("object70") {{
@@ -336,6 +374,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         objectMines1 = new ItemTurret("object-1") {{
@@ -344,6 +384,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         DORA = new Turret("dora") {{
@@ -400,6 +442,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         octoAlpha = new PowerTurret("octo-alpha") {{
@@ -408,6 +452,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         octoTheta = new PowerTurret("octo-theta") {{
@@ -416,6 +462,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         octoGamma = new PowerTurret("octo-gamma") {{
@@ -424,6 +472,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         octoDelta = new PowerTurret("octo-delta") {{
@@ -432,6 +482,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         octoSigma = new PowerTurret("octo-sigma") {{
@@ -440,6 +492,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         octoFloat = new PowerTurret("octo-float") {{
@@ -448,6 +502,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         octoString = new PowerTurret("octo-string") {{
@@ -456,6 +512,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         octoDouble = new PowerTurret("octo-double") {{
@@ -464,6 +522,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         octoKraken = new PowerTurret("octo-kraken") {{
@@ -472,6 +532,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         octoTerra = new PowerTurret("octo-terra") {{
@@ -480,6 +542,8 @@ public class OctoBlocks {
             this.requirements(Category.turret, BuildVisibility.hidden, ItemStack.with(
                     OctoItems.researchStruct, Integer.MAX_VALUE
             ));
+
+            this.drawer = new DrawTurret("reinforced-");
         }};
 
         //poland

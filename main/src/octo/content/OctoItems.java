@@ -17,6 +17,16 @@ public class OctoItems {
         soul,
         monolith,
         researchStruct,
+        octoMatAlloy,
+        pentagonium,
+        chargedPentagonium,
+        silver,
+        steel,
+        slime,
+        substance43,
+        warlockCube,
+        magmaCube,
+        gold,
     end;
 
     public static @SuppressWarnings("unused") Liquid
@@ -43,10 +53,84 @@ public class OctoItems {
             this.charge = 720;
         }};
 
+        octoMatAlloy = new Item("octo-mat-alloy", Pal.heal) {{
+            this.radioactivity = 0.75f;
+            this.charge = 1f;
+        }};
+
+        gold = new Item("gold", Color.yellow) {{
+            this.charge = 350;
+        }};
+
+        magmaCube = new Item("magma-cube", Color.red) {{
+            this.charge = 2f;
+
+            this.flammability = 100f;
+            this.explosiveness = 50f;
+        }};
+
+        pentagonium = new Item("pentagonium", Items.sporePod.color) {{
+            this.radioactivity = 560;
+            this.charge = 600;
+
+            this.flammability = 200;
+        }};
+
+        silver = new Item("silver", Color.gray) {{
+            this.charge = 0;
+            this.radioactivity = 0;
+            this.flammability = 0;
+            this.explosiveness = 0.25f;
+        }};
+
+        slime = new Item("slime", Color.green) {{
+            this.charge = 0;
+            this.radioactivity = 1;
+            this.flammability = 2;
+            this.explosiveness = 0.25f;
+        }};
+
+        steel = new Item("steel", Color.gray) {{
+            this.charge = 0;
+            this.radioactivity = 0;
+            this.flammability = 0;
+            this.explosiveness = 0;
+        }};
+
+        substance43 = new Item("substance43", Items.sporePod.color) {{
+            this.charge = 0.25f;
+            this.radioactivity = 500;
+            this.flammability = 200;
+            this.explosiveness = 100;
+        }};
+
+        warlockCube = new Item("warlock-cube", Color.cyan) {{
+            this.charge = 100;
+            this.radioactivity = 0.10f;
+            this.explosiveness = 2;
+            this.flammability = -500f;
+        }};
+
+        chargedPentagonium = new Item("charged-pentagonium", Color.yellow) {{
+            this.charge = 1670;
+            this.explosiveness = 5;
+            this.radioactivity = 880;
+            this.flammability = 200;
+        }};
+
+        end = new Item("end", Color.white) {{
+            this.charge =
+                    this.flammability =
+                            this.radioactivity =
+                                    this.explosiveness =
+                                            Float.POSITIVE_INFINITY;
+
+            this.alwaysUnlocked = true;
+        }};
+
         if(!Octo.betamindyModule.validMod()) {
             researchStruct = new Item("research-struct", Color.white) {{
                 this.charge = -999;
-                this.alwaysUnlocked = true;
             }};
         }
 
@@ -83,9 +167,11 @@ public class OctoItems {
     public static void loadAnimated() {
         //region items
 
-        load(octoMat,  2);
-        load(soul,     6);
+        load(octoMat, 2);
+        load(soul, 6);
         load(monolith, 0);
+        load(chargedPentagonium, 2);
+        load(end, -2);
 
         //end items
         //region liquids
