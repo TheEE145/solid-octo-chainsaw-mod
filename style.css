@@ -49,6 +49,9 @@ header {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+
+    display: flex;
+    flex-wrap: wrap;
 }
 
 content {
@@ -152,4 +155,20 @@ th, td {
 
 .flag {
     border: 3px solid black;
+}
+
+@media screen and (max-width: 1117px) {
+    header {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .col8 {
+        width: 100%;
+    }
+
+    .col2 {
+        width: 0%;
+    }
 }
