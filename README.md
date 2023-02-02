@@ -1,4 +1,4 @@
-![](assets/sprites/logo.png)
+![](assets/sprites/logoGit.png)
 A modular java mindustry mod that works on PC.
 
 ## Mod dependency support / Java 16 / modules
