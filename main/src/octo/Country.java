@@ -1,4 +1,4 @@
-package octo.util;
+package octo;
 
 import arc.scene.style.TextureRegionDrawable;
 import arc.struct.Seq;
@@ -9,6 +9,7 @@ import mindustry.ctype.UnlockableContent;
 import mindustry.world.meta.StatValue;
 
 import octo.content.OctoStats;
+import octo.util.Regions;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

@@ -12,7 +12,7 @@ import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatCat;
 import mindustry.world.meta.Stats;
 
-import octo.util.Country;
+import octo.Country;
 import java.util.function.Supplier;
 
 import static mindustry.Vars.content;
