@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+version '1.0'
+
+dependencies {
+    implementation "com.squareup:javapoet:$javapoetVersion"
+    implementation modModule(":graphics")
+    implementation modModule(":tools")
+
+    runtimeOnly "$mindustryCl"
+    runtimeOnly "$arcCl"
+}
+
+sourceSets.main.java.srcDirs = ['src']
+sourceSets.test.java.srcDirs = []
+
+sourceSets.main.resources.srcDirs = ['../../.process']
+sourceSets.test.resources.srcDirs = []

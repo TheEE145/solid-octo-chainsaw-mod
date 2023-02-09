@@ -1,4 +1,4 @@
-![](assets/sprites/logoGit.png)
+![](.assets-raw/logoGit.png)
 A modular java mindustry mod that works on PC.
 
 ## Building for Desktop Testing

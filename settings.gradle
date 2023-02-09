@@ -1,5 +1,6 @@
-include 'main'
-include 'annotations'
-include 'tools'
-include 'cmdparser'
-
+include ':modules:octo.main'
+include ':modules:octo.annotations'
+include ':modules:octo.tools'
+include ':modules:octo.cmdparser'
+include ':modules:octo.eventbus'
+include ':modules:octo.graphics'
