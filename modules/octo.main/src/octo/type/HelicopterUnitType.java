@@ -3,6 +3,7 @@ package octo.type;
 import mindustry.gen.Unit;
 import arc.struct.Seq;
 
+import mindustry.graphics.MultiPacker;
 import octo.core.util.unit.XeonUnitType;
 import octo.core.graphics.Drawl;
 
@@ -26,6 +27,16 @@ public class HelicopterUnitType extends XeonUnitType {
                 }
             }
         }
+    }
+
+    @Override
+    public void createIcons(MultiPacker packer) {
+        super.createIcons(packer);
+
+        this.rotors.forEach(rotor -> {
+            this.outline(packer, rotor.topRegion, rotor.name + "-outline");
+            this.outline(packer, rotor.topRegion, rotor.name + "-top-outline");
+        });
     }
 
     @Override

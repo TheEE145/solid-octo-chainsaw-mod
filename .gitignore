@@ -153,3 +153,5 @@ android/libs/
 /modules/octo.cmdparser/build
 /modules/octo.tools/build
 /modules/octo.main/build
+/modules/octo.eventbus/build
+/modules/octo.graphics/build

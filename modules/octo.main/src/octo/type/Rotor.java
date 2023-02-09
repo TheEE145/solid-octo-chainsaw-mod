@@ -9,6 +9,7 @@ import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
 import octo.core.graphics.Drawl;
 import octo.core.graphics.Regions;
+import octo.core.util.ImgScalar;
 import org.jetbrains.annotations.Contract;
 
 import java.util.Objects;
@@ -20,19 +21,22 @@ public class Rotor {
     public TextureRegion
         bladeRegion,
         bladeBlurRegion,
+        bladeRegionOutline,
+        topRegionOutline,
         topRegion;
 
     public float
             x = 0,
             y = 0,
-            rotorSpeed = 12,
-            minimumRotorSpeed = 3,
+            rotorSpeed = 6,
+            minimumRotorSpeed = 2,
             rotorLayer = 0.5f,
             topLayer = 1f,
-            rotorBlurAlpha = 0.8f;
+            rotorBlurAlpha = 0.8f,
+            scl = 1;
 
     public boolean drawTop = true;
-    public int blades = 4;
+    public int blades = 3;
 
     @Contract(pure = true)
     public Rotor(String name) {
@@ -44,6 +48,9 @@ public class Rotor {
         this.bladeRegion = Regions.getRegion(this.name);
         this.bladeBlurRegion = Regions.getRegion(this.name + "-blur", this.bladeRegion);
         this.topRegion = Regions.getRegion(this.name + "-top");
+
+        this.bladeRegionOutline = Regions.getRegion(this.name + "-outline", this.bladeRegion);
+        this.topRegionOutline = Regions.getRegion(this.name + "-top-outline", this.topRegion);
     }
 
     public RotorMount createMount() {
@@ -77,14 +84,19 @@ public class Rotor {
 
             Drawl.lRes(rotorLayer);
             Draw.alpha(rotorBlurAlpha);
+
+            ImgScalar.set(bladeBlurRegion);
+            float w = ImgScalar.width(scl);
+            float h = ImgScalar.height(scl);
+
             for(float angle = 0; angle < 360; angle += (360f / blades)) {
-                Draw.rect(bladeBlurRegion, x, y, angle + rotorRotation);
+                Draw.rect(bladeBlurRegion, x, y, w, h, angle + rotorRotation);
             }
 
             Drawl.lRes(-rotorLayer + topLayer);
             if(drawTop) {
                 Draw.alpha(1);
-                Drawf.spinSprite(topRegion, x, y, unit.rotation);
+                Drawf.spinSprite(topRegionOutline, x, y, unit.rotation);
             }
 
             Drawl.lRes(-topLayer);
