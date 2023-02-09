@@ -10,6 +10,16 @@ public class XeonUnitEntity extends UnitEntity {
     }
 
     @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "#" + this.id;
+    }
+
+    @Override
+    public int classId() {
+        return XeonUnits.classID(this.getClass());
+    }
+
+    @Override
     public void setType(UnitType type) {
         super.setType(type);
 

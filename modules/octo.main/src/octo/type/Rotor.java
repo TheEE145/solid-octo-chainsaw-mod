@@ -10,6 +10,7 @@ import mindustry.graphics.Drawf;
 import octo.core.graphics.Drawl;
 import octo.core.graphics.Regions;
 import octo.core.util.ImgScalar;
+import octo.core.util.Time;
 import org.jetbrains.annotations.Contract;
 
 import java.util.Objects;
@@ -30,6 +31,7 @@ public class Rotor {
             y = 0,
             rotorSpeed = 6,
             minimumRotorSpeed = 2,
+            rotorFallSpeed = 0.5f,
             rotorLayer = 0.5f,
             topLayer = 1f,
             rotorBlurAlpha = 0.8f,
@@ -69,8 +71,9 @@ public class Rotor {
         public void update(Unit unit) {
             Objects.requireNonNull(unit);
 
-            if((unit.dead || unit.health <= 0) && this.rotorSpeed > minimumRotorSpeed) {
-                this.rotorSpeed--;
+            if((unit.dead || unit.health <= 0) && Time.every(5) &&
+                    this.rotorSpeed > minimumRotorSpeed) {
+                this.rotorSpeed -= rotorFallSpeed;
             }
 
             this.rotorRotation = (this.rotorRotation + this.rotorSpeed) % 360;

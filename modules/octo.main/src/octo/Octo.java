@@ -1,5 +1,6 @@
 package octo;
 
+import arc.ApplicationListener;
 import arc.Core;
 import arc.struct.Seq;
 import mindustry.Vars;
@@ -8,6 +9,7 @@ import mindustry.mod.Mods;
 
 import octo.content.*;
 import octo.core.graphics.ModIcons;
+import octo.core.util.unit.XeonUnits;
 import octo.ui.ModDialog;
 import octo.content.modModules.BetamindyDependencyModule;
 import octo.gen.IconManager;
@@ -20,7 +22,7 @@ import octo.core.util.annotations.Mod;
 
 import octo.core.events.MindustryEventApi;
 
-public @Mod class Octo extends mindustry.mod.Mod {
+public @Mod class Octo extends mindustry.mod.Mod implements ApplicationListener {
     public static final BetamindyDependencyModule betamindyModule;
     public static Mods.LoadedMod mod;
 
@@ -28,8 +30,14 @@ public @Mod class Octo extends mindustry.mod.Mod {
             betamindyModule = new BetamindyDependencyModule()
     );
 
+    @Override
+    public void update() {
+        //XeonUnits.setLoaders();
+    }
+
     public Octo() {
         ModIcons.onload = OctoIcons::load;
+        Core.app.addListener(this);
 
         Log.info("loading events api");
         MindustryEventApi.bus.get(ClientLoadEvent.class)
