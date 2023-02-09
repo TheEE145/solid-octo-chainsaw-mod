@@ -2,6 +2,7 @@ package octo.content;
 
 import mindustry.type.UnitType;
 
+import mindustry.type.Weapon;
 import octo.core.graphics.Outliner;
 import octo.core.util.unit.XeonUnitType;
 import octo.core.util.unit.XeonUnits;
@@ -43,6 +44,14 @@ public class OctoUnits {
                         this.rotorLayer = -5.0f;
                     }}
             );
+
+            this.weapons.add(new Weapon("zenith-missiles") {{
+                this.y = -4;
+                this.x = 8;
+
+                this.reload = 30;
+                this.bullet = OctoBullets.type10missile;
+            }});
         }};
     }
 }
