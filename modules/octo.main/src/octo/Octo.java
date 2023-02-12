@@ -1,26 +1,25 @@
 package octo;
 
 import arc.ApplicationListener;
-import arc.Core;
 import arc.struct.Seq;
-import mindustry.Vars;
+import arc.Core;
+
 import mindustry.game.EventType.*;
 import mindustry.mod.Mods;
+import mindustry.Vars;
 
-import octo.content.*;
-import octo.core.graphics.ModIcons;
-import octo.core.util.unit.XeonUnits;
-import octo.ui.ModDialog;
 import octo.content.modModules.BetamindyDependencyModule;
 import octo.gen.IconManager;
 import octo.gen.ModSounds;
+import octo.ui.ModDialog;
+import octo.content.*;
 
+import octo.core.util.depedency.ModDependencyContainer;
+import octo.core.events.MindustryEventApi;
+import octo.core.util.annotations.Mod;
+import octo.core.graphics.ModIcons;
 import octo.core.util.FileFinder;
 import octo.core.util.Log;
-import octo.core.util.depedency.ModDependencyContainer;
-import octo.core.util.annotations.Mod;
-
-import octo.core.events.MindustryEventApi;
 
 public @Mod class Octo extends mindustry.mod.Mod implements ApplicationListener {
     public static final BetamindyDependencyModule betamindyModule;
@@ -68,6 +67,7 @@ public @Mod class Octo extends mindustry.mod.Mod implements ApplicationListener 
         OctoStats.loadCountries();
         //ModStatusEffects.load()
         OctoItems.load();
+        OctoFx.load();
         OctoBullets.load();
         OctoUnits.load();
         OctoBlocks.load();

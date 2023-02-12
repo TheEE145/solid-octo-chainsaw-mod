@@ -1,11 +1,11 @@
 package octo.content;
 
-import arc.graphics.Color;
-import mindustry.content.Fx;
-import mindustry.content.Items;
 import mindustry.content.StatusEffects;
 import mindustry.entities.bullet.*;
+import mindustry.content.Items;
 import mindustry.graphics.Pal;
+import mindustry.content.Fx;
+import arc.graphics.Color;
 
 public class OctoBullets {
     public static @SuppressWarnings("unused") BulletType
@@ -16,6 +16,7 @@ public class OctoBullets {
             soulStormShoot,
             polandLaser,
             type10missile,
+            type10laser,
     end;
 
     public static void load() {
@@ -103,6 +104,20 @@ public class OctoBullets {
             despawnEffect = Fx.blastExplosion;
             weaveScale = 6f;
             weaveMag = 1f;
+        }};
+
+        type10laser = new RailBulletType() {{
+            length = 160f;
+            damage = 12f;
+
+            pierceDamageFactor = 0.8f;
+            hitColor = Color.valueOf("feb380");
+
+            hitEffect = Fx.hitBulletColor;
+            smokeEffect = Fx.colorSpark;
+            endEffect = OctoFx.railEnd;
+            shootEffect = OctoFx.railShoot;
+            lineEffect = OctoFx.railLine;
         }};
     }
 }

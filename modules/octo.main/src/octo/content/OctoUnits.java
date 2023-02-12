@@ -1,13 +1,14 @@
 package octo.content;
 
 import mindustry.type.UnitType;
-
 import mindustry.type.Weapon;
-import octo.core.graphics.Outliner;
+
 import octo.core.util.unit.XeonUnitType;
 import octo.core.util.unit.XeonUnits;
-import octo.type.HelicopterEntity;
+import octo.core.graphics.Outliner;
+
 import octo.type.HelicopterUnitType;
+import octo.type.HelicopterEntity;
 import octo.type.Rotor;
 
 public class OctoUnits {
@@ -30,7 +31,7 @@ public class OctoUnits {
 
             this.health = 160;
             this.rotateSpeed = 6f;
-            this.hitSize = 8 * 3;
+            this.hitSize = 8 * 4;
 
             this.rotors.addAll(
                     new Rotor("type10-rotor") {{
@@ -45,13 +46,23 @@ public class OctoUnits {
                     }}
             );
 
-            this.weapons.add(new Weapon("zenith-missiles") {{
-                this.y = -4;
-                this.x = 8;
+            this.weapons.addAll(
+                    new Weapon("zenith-missiles") {{
+                        this.y = -4;
+                        this.x = 8;
+                        this.reload = 15;
+                        this.bullet = OctoBullets.type10missile;
+                    }},
 
-                this.reload = 30;
-                this.bullet = OctoBullets.type10missile;
-            }});
+                    new Weapon("artillery") {{
+                        this.reload = 30;
+                        this.y = 8;
+                        this.x = 6;
+
+                        this.layerOffset = -1;
+                        this.bullet = OctoBullets.type10laser;
+                    }}
+            );
         }};
     }
 }

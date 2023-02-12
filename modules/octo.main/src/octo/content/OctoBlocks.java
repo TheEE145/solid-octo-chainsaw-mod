@@ -1,5 +1,6 @@
 package octo.content;
 
+import mindustry.Vars;
 import mindustry.content.*;
 
 import mindustry.entities.pattern.ShootAlternate;
@@ -15,7 +16,9 @@ import mindustry.world.blocks.defense.turrets.ContinuousLiquidTurret;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.blocks.defense.turrets.Turret;
+import mindustry.world.blocks.power.PowerNode;
 import mindustry.world.blocks.production.GenericCrafter;
+import mindustry.world.blocks.production.Pump;
 import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.draw.*;
 import mindustry.world.meta.BuildVisibility;
@@ -568,6 +571,7 @@ public class OctoBlocks {
             ));
 
             this.buildVisibility = BuildVisibility.sandboxOnly;
+            this.squareSprite = false;
         }};
 
         //end turrets
@@ -578,6 +582,7 @@ public class OctoBlocks {
             this.isSpike = true;
             this.spikeDamage = 85;
             this.bulletCollides = false;
+            this.block32 = () -> OctoBlocks.octoMatWall;
 
             this.requirements(Category.defense, ItemStack.with(
                     OctoItems.octoMat, 7
@@ -680,5 +685,15 @@ public class OctoBlocks {
         }};
 
         //end illegal
+
+        Vars.content.blocks().each(block -> {
+            if(block instanceof Turret turret) {
+                if(turret.drawer instanceof DrawTurret turret1) {
+                    if(turret1.basePrefix.equals("reinforced-")) {
+                        turret.squareSprite = false;
+                    }
+                }
+            }
+        });
     }
 }

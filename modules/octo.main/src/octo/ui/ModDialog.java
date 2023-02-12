@@ -35,14 +35,16 @@ import static mindustry.Vars.*;
  */
 public class ModDialog extends BaseDialog {
     public static Dialog currentDialog = null;
+    private static final Runnable installer;
 
     public static final String repo = "https://github.com/TheEE145/solid-octo-chainsaw-mod";
-    private static final Runnable installer;
+    public static final String site = "https://theee145.github.io/solid-octo-chainsaw-mod/";
 
     static {
         try {
             Method mod = ModsDialog.class.getDeclaredMethod(
-                    "githubImportMod", String.class, boolean.class, String.class
+                    "githubImportMod", String.class,
+                    boolean.class, String.class
             );
 
             mod.setAccessible(true);
@@ -178,14 +180,15 @@ public class ModDialog extends BaseDialog {
             }
         });
 
-        if(!Octo.mod.hasSteamID()) {
-            this.buttons.button("@mods.browser.reinstall", Icon.download, installer);
-        }
+        this.buttons.row();
+        this.buttons.button("@mods.browser.reinstall", Icon.download, installer);
 
-        if(!mobile) {
-            this.buttons.button("@mods.openfolder", Icon.folder, () -> {
-                Core.app.openFolder(Octo.mod.root.absolutePath());
-            });
-        }
+        this.buttons.button("@mods.openfolder", Icon.folder, () -> {
+            Core.app.openFolder(Octo.mod.root.absolutePath());
+        });
+
+        this.buttons.button("@mods.website", Icon.export, () -> {
+            Core.app.openURI(site);
+        });
     }
 }

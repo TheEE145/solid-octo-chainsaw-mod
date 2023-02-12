@@ -8,9 +8,10 @@ import mindustry.gen.Building;
 import mindustry.world.blocks.defense.Wall;
 
 import octo.core.graphics.Regions;
+import octo.core.graphics.Splitter;
 
 public class OctoWall extends Wall {
-    public TextureRegion[] joints = new TextureRegion[5];
+    public TextureRegion[] joints = new TextureRegion[16];
     public boolean jointsEnabled = false;
 
     public OctoWall(String name) {
@@ -23,17 +24,12 @@ public class OctoWall extends Wall {
         super.load();
 
         if(this.jointsEnabled) {
-            for(int i = 0; i < this.joints.length; i++) {
-                this.joints[i] = Regions.getRegion(this.name + i);
-            }
+            this.joints = Splitter.getRegions(Regions.getRegion(this.name + "-sheet"), 4, 4, 32);
         }
     }
 
     public class OctoWallBuilding extends Building {
-        public void draw(int id, float rot) {
-            Draw.rect(joints[id], this.x, this.y, rot);
-            this.drawTeamTop();
-        }
+        public byte reg;
 
         @Override
         public void draw() {
@@ -42,25 +38,16 @@ public class OctoWall extends Wall {
                 return;
             }
 
-            boolean left, right, top, bottom;
-            int bTop    = (top    = this.jointEnabled(this.nearby(0,  1))) ? 1 : 0;
-            int bBottom = (bottom = this.jointEnabled(this.nearby(0, -1))) ? 1 : 0;
-            int bLeft   = (left   = this.jointEnabled(this.nearby(1,  0))) ? 1 : 0;
-            int bRight  = (right  = this.jointEnabled(this.nearby(-1, 0))) ? 1 : 0;
-
-            Draw.rect(region, this.x, this.y, this.drawrot());
-            if((top && bottom && !left && !right) || (left && right && !top && !bottom)) {
-                this.draw(4, left ? 0 : 90);
-            } else {
-                switch(bTop + bBottom + bLeft + bRight) {
-                    case 1 -> this.draw(0, top ? -90 : (bottom ? 90 : (left ? 180 : 0)));
-                    case 2 -> this.draw(1, (right ? 0 : 180) + (top ? (right ? -90 : 0) : (right ? 0 : -90)));
-                    case 3 -> this.draw(2, top && bottom ? (left ? 90 : -90) : (top ? 180 : 0));
-                    case 4 -> this.draw(3, 0);
-                    //join 0 draw == super.draw() method
-                    default -> super.draw();
+            this.reg = 0;
+            for(int i = 0; i < 4; i++) {
+                Building build = this.nearby(i);
+                if(build != null && build.block == this.block) {
+                    this.reg += 1 << i;
                 }
             }
+
+            Draw.rect(joints[this.reg], this.x, this.y);
+            this.drawTeamTop();
         }
 
         public boolean jointEnabled(Building building) {

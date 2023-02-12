@@ -9,10 +9,10 @@ import arc.graphics.g2d.Lines;
 import mindustry.world.Block;
 import mindustry.gen.Building;
 import mindustry.graphics.Layer;
+import mindustry.world.meta.Stat;
 import mindustry.world.blocks.logic.LogicBlock;
 import mindustry.world.blocks.defense.turrets.Turret;
 
-import mindustry.world.meta.Stat;
 import octo.core.util.BlockUtils;
 import octo.core.util.world.Ranged;
 

@@ -1,5 +1,9 @@
 package octo.world;
 
+import arc.func.Prov;
+import arc.math.geom.Geometry;
+import arc.math.geom.Point2;
+import mindustry.Vars;
 import mindustry.gen.Building;
 import mindustry.gen.Bullet;
 import mindustry.gen.Unit;
@@ -11,11 +15,15 @@ import mindustry.world.meta.Stat;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 
+import octo.core.graphics.Drawl;
 import octo.core.graphics.Regions;
 import octo.core.util.Time;
 
 public class OctoBlockJoint extends Block {
+    public static final float spikeLayer = 1.259238502358f;
+
     public TextureRegion mirrorRegion = null;
+    public Prov<Block> block32 = null;
     public StatusEffect damageStatus;
     public boolean mirror = false;
 
@@ -80,6 +88,31 @@ public class OctoBlockJoint extends Block {
 
             Draw.rect(reg, this.x, this.y, this.drawrot());
             this.drawTeamTop();
+
+            Building nearby = this.nearby(this.rotation);
+            Block block32 = OctoBlockJoint.this.block32.get();
+            if(this.isActive() && !nearby.block.squareSprite && block32 != null) {
+                TextureRegion region1 = block32.fullIcon;
+
+                if(block32 instanceof OctoWall wall && wall.jointsEnabled) {
+                    region1 = wall.joints[switch(this.rotation) {
+                        case 0 -> 4;
+                        case 1 -> 8;
+                        case 2 -> 1;
+                        case 3 -> 2;
+
+                        default -> 15; //unreachable
+                    }];
+                }
+
+                Point2 rotPoint = Geometry.d4[this.rotation];
+                Tile tile1 = Vars.world.tile(this.tileX() + rotPoint.x,
+                        this.tileY() + rotPoint.y);
+
+                Drawl.lRes(-spikeLayer);
+                Draw.rect(region1, tile1.x * 8, tile1.y * 8);
+                Drawl.lRes(spikeLayer);
+            }
         }
 
         public boolean isActive() {

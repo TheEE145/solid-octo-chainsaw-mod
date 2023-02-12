@@ -4,16 +4,15 @@ import arc.scene.style.TextureRegionDrawable;
 import arc.struct.Seq;
 import arc.Core;
 
-import mindustry.ctype.ContentType;
 import mindustry.ctype.UnlockableContent;
 import mindustry.world.meta.StatValue;
+import mindustry.ctype.ContentType;
 
-import octo.content.OctoStats;
-import octo.core.graphics.Regions;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.function.Supplier;
+import octo.core.graphics.Regions;
+import octo.content.OctoStats;
 
 public class Country extends UnlockableContent {
     public Seq<Supplier<TextureRegionDrawable>> ways = new Seq<>();
