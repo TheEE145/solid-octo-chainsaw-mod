@@ -9,6 +9,7 @@ import mindustry.mod.Mods;
 import mindustry.Vars;
 
 import octo.content.modModules.BetamindyDependencyModule;
+import octo.content.modModules.OmaloonDependencyModule;
 import octo.gen.IconManager;
 import octo.gen.ModSounds;
 import octo.ui.ModDialog;
@@ -23,10 +24,12 @@ import octo.core.util.Log;
 
 public @Mod class Octo extends mindustry.mod.Mod implements ApplicationListener {
     public static final BetamindyDependencyModule betamindyModule;
+    public static final OmaloonDependencyModule omaloonModule;
     public static Mods.LoadedMod mod;
 
     public static final ModDependencyContainer container = new ModDependencyContainer(
-            betamindyModule = new BetamindyDependencyModule()
+            betamindyModule = new BetamindyDependencyModule(),
+            omaloonModule = new OmaloonDependencyModule()
     );
 
     @Override

@@ -17,7 +17,7 @@ import static octo.core.util.TechTreeUtils.*;
 public class BetamindyDependencyModule extends ModDependencyModule {
     //region new
 
-    public static Block
+    public static @SuppressWarnings("unused") Block
             bittriumWall,
             bittriumWallLarge,
             bittriumSpike,
@@ -72,6 +72,7 @@ public class BetamindyDependencyModule extends ModDependencyModule {
             this.isSpike = true;
             this.spikeDamage = 235;
             this.bulletCollides = false;
+            this.block32 = () -> bittriumWall;
 
             this.requirements(Category.defense, ItemStack.with(
                     bittrium, 7
