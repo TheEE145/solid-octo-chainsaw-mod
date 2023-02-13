@@ -4,14 +4,17 @@ import arc.ApplicationListener;
 import arc.struct.Seq;
 import arc.Core;
 
+import mindustry.core.ContentLoader;
+import mindustry.ctype.UnlockableContent;
 import mindustry.game.EventType.*;
+import static mindustry.Vars.*;
 import mindustry.mod.Mods;
-import mindustry.Vars;
 
 import octo.content.modModules.BetamindyDependencyModule;
 import octo.content.modModules.OmaloonDependencyModule;
 import octo.gen.IconManager;
 import octo.gen.ModSounds;
+import octo.type.darkenergy.DarkEnergy;
 import octo.ui.ModDialog;
 import octo.content.*;
 
@@ -45,11 +48,11 @@ public @Mod class Octo extends mindustry.mod.Mod implements ApplicationListener 
         MindustryEventApi.bus.get(ClientLoadEvent.class)
                 .addEventListener(IconManager::load)
                 .addEventListener(OctoUI::loadSettings)
+                .addEventListener(this::post)
                 .addEventListener(OctoItems::loadAnimated)
                 .addEventListener(OctoStats::post)
                 .addEventListener(OctoUI::load)
                 .addEventListener(OctoCommands::registerCommands)
-                .addEventListener(this::post)
                 .addEventListener(ModDialog::load);
 
         Log.info("loading sound structure");
@@ -62,10 +65,8 @@ public @Mod class Octo extends mindustry.mod.Mod implements ApplicationListener 
 
     @Override
     public void loadContent() {
-        //content
         container.init();
         container.preload();
-
         OctoStats.load();
         OctoStats.loadCountries();
         //ModStatusEffects.load()
@@ -77,23 +78,21 @@ public @Mod class Octo extends mindustry.mod.Mod implements ApplicationListener 
         //ModPlanets.load()
         //ModSectorPresets.load()
         OctoTech.load();
-
-        container.loadContent();
     }
 
     public void post() {
-        if(!Core.settings.getBool("nocoreteams") && !Vars.headless) {
+        FileFinder.modToSearch = mod = mods.getMod(this.getClass());
+        container.loadContent();
+
+        content.blocks().each(DarkEnergy::fixModules);
+        if(!Core.settings.getBool("nocoreteams") && !headless) {
             OctoBlocks.fixCoreIcon(OctoBlocks.coreOctogen);
         }
-
-        FileFinder.modToSearch = mod = Vars.mods.getMod(this.getClass());
 
         //spoiler there`s not contributors, it`s just borrow and freesound.org
         OctoUI.contributors = Seq.with(FileFinder.getSearcher("contributors_mod")
                 .log().nextProtocol().readString("UTF-8").split("\n")).filter((str) -> {
                     return !str.isEmpty() && !str.startsWith("//");
         });
-
-        Log.fine("you see messages about search protocol?");
     }
 }

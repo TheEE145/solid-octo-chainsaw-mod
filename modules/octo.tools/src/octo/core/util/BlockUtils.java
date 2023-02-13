@@ -1,5 +1,6 @@
 package octo.core.util;
 
+import arc.func.Boolf;
 import mindustry.gen.Building;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
@@ -7,6 +8,8 @@ import arc.struct.Seq;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 import static mindustry.Vars.*;
 
@@ -50,5 +53,20 @@ public class BlockUtils {
         }
 
         return result;
+    }
+
+    @Contract("null, _ -> fail; _, null -> fail;")
+    public static byte getJoint(Building building, Boolf<Building> func) {
+        Objects.requireNonNull(building);
+        Objects.requireNonNull(func);
+
+        byte reg = 0;
+        for(int i = 0; i < 4; i++) {
+            if(func.get(building.nearby(i))) {
+                reg += 1 << i;
+            }
+        }
+
+        return reg;
     }
 }

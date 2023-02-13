@@ -1,5 +1,6 @@
 package octo.content.modModules;
 
+import mindustry.core.ContentLoader;
 import mindustry.type.Category;
 import mindustry.type.Item;
 import mindustry.type.ItemStack;
@@ -38,7 +39,7 @@ public class OmaloonDependencyModule extends ModDependencyModule {
         //end mod
         //region blocks
 
-        omaliteAlloySpike = new OctoBlockJoint(this.prefix("omalite-alloy-spike")) {{
+        omaliteAlloySpike = new OctoBlockJoint("omalite-alloy-spike") {{
             this.mirror = true;
             this.isSpike = true;
             this.spikeDamage = 105;
@@ -51,6 +52,11 @@ public class OmaloonDependencyModule extends ModDependencyModule {
         }};
 
         //end blocks
+        //region transform
+
+        this.transformations.addAll(omaliteAlloySpike);
+
+        //end transform
     }
 
     //end override

@@ -50,7 +50,7 @@ public class BetamindyDependencyModule extends ModDependencyModule {
         //end mod
         //region blocks
 
-        bittriumWall = new Wall(this.prefix("bittrium-wall")) {{
+        bittriumWall = new Wall("bittrium-wall") {{
             this.health = 4040;
 
             this.requirements(Category.defense, ItemStack.with(
@@ -58,7 +58,7 @@ public class BetamindyDependencyModule extends ModDependencyModule {
             ));
         }};
 
-        bittriumWallLarge = new Wall(this.prefix("bittrium-wall-large")) {{
+        bittriumWallLarge = new Wall("bittrium-wall-large") {{
             this.health = 16160;
             this.size = 2;
 
@@ -67,7 +67,7 @@ public class BetamindyDependencyModule extends ModDependencyModule {
             ));
         }};
 
-        bittriumSpike = new OctoBlockJoint(this.prefix("bittrium-spike")) {{
+        bittriumSpike = new OctoBlockJoint("bittrium-spike") {{
             this.mirror = true;
             this.isSpike = true;
             this.spikeDamage = 235;
@@ -94,6 +94,13 @@ public class BetamindyDependencyModule extends ModDependencyModule {
         });
 
         //end tech
+        //region transform
+
+        this.transformations.addAll(
+                bittriumWall, bittriumWallLarge, bittriumSpike
+        );
+
+        //end transform
     }
 
     //end override

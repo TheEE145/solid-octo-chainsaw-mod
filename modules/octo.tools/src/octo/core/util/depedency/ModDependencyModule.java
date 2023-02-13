@@ -1,5 +1,8 @@
 package octo.core.util.depedency;
 
+import arc.struct.Seq;
+import mindustry.ctype.UnlockableContent;
+import mindustry.mod.Mod;
 import mindustry.mod.Mods;
 import mindustry.type.Item;
 import mindustry.type.Liquid;
@@ -7,6 +10,7 @@ import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.world.Block;
 
+import octo.core.util.FileFinder;
 import octo.core.util.ModUtils;
 
 import org.jetbrains.annotations.Contract;
@@ -19,6 +23,7 @@ import static mindustry.Vars.*;
  * @author TheEE145
  */
 public abstract class ModDependencyModule {
+    public Seq<UnlockableContent> transformations = new Seq<>();
     public Mods.LoadedMod loadedMod;
 
     @Contract(pure = true)
@@ -39,11 +44,16 @@ public abstract class ModDependencyModule {
     }
 
     public String prefix(String name) {
-        if(this.validMod()) {
-            return this.loadedMod.name + "-" + name;
+        if(!this.validMod()) {
+            return name;
         }
 
-        return name;
+        String pref = this.loadedMod.name + "-";
+        if(name.startsWith(pref)) {
+            return name;
+        }
+
+        return pref + name;
     }
 
     public Item itemFromMod(String name) {
@@ -67,6 +77,28 @@ public abstract class ModDependencyModule {
     }
 
     public void preload() {
+    }
+
+    public void setAndLoadContentOnClientLoadEvent() {
+        this.setAndLoadContent(true);
+    }
+
+    public void setAndLoadContent(boolean clientLoadEvent) {
+        Mods.LoadedMod current = ModUtils.getCurrentMod();
+        content.setCurrentMod(this.loadedMod);
+        this.loadContent();
+
+        if(clientLoadEvent) {
+            AssetsTransformProcessor.transform();
+
+            this.transformations.each(transformElement -> {
+                transformElement.init();
+                transformElement.load();
+                transformElement.loadIcon();
+            });
+        }
+
+        content.setCurrentMod(current);
     }
 
     public abstract void loadContent();

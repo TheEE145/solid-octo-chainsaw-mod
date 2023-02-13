@@ -9,6 +9,7 @@ import mindustry.world.blocks.defense.Wall;
 
 import octo.core.graphics.Regions;
 import octo.core.graphics.Splitter;
+import octo.core.util.BlockUtils;
 
 public class OctoWall extends Wall {
     public TextureRegion[] joints = new TextureRegion[16];
@@ -29,8 +30,6 @@ public class OctoWall extends Wall {
     }
 
     public class OctoWallBuilding extends Building {
-        public byte reg;
-
         @Override
         public void draw() {
             if(!jointsEnabled) {
@@ -38,20 +37,10 @@ public class OctoWall extends Wall {
                 return;
             }
 
-            this.reg = 0;
-            for(int i = 0; i < 4; i++) {
-                Building build = this.nearby(i);
-                if(build != null && build.block == this.block) {
-                    this.reg += 1 << i;
-                }
-            }
-
-            Draw.rect(joints[this.reg], this.x, this.y);
+            Draw.rect(joints[BlockUtils.getJoint(this, (build -> {
+                return build != null && build.block == this.block;
+            }))], this.x, this.y);
             this.drawTeamTop();
-        }
-
-        public boolean jointEnabled(Building building) {
-            return building != null && building.block == OctoWall.this;
         }
     }
 }

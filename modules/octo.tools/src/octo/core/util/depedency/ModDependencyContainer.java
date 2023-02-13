@@ -36,6 +36,6 @@ public class ModDependencyContainer {
     }
 
     public void loadContent() {
-        this.validOnly().each(ModDependencyModule::loadContent);
+        this.validOnly().each(ModDependencyModule::setAndLoadContentOnClientLoadEvent);
     }
 }

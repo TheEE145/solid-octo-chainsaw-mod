@@ -29,6 +29,10 @@ import octo.world.OctoBlockJoint;
 import octo.world.OctoWall;
 import octo.gen.ModSounds;
 import octo.core.graphics.Regions;
+import octo.world.darkenergy.DarkEnergyCrafter;
+import octo.world.darkenergy.DarkEnergyHole;
+import octo.world.darkenergy.DarkEnergyPipe;
+import octo.world.darkenergy.DarkEnergySource;
 
 public class OctoBlocks {
     public @SuppressWarnings("unused") static Block
@@ -106,9 +110,15 @@ public class OctoBlocks {
             soulCollector,
             soulHardener,
             soulSmelter,
+            darkEnergyGenerator,
 
             //illegal
             illegalItemSource,
+
+            //dark energy
+            darkEnergySource,
+            darkEnergyHole,
+            darkEnergyPipe,
     end;
 
     public static void fixCoreIcon(Block block) {
@@ -676,15 +686,52 @@ public class OctoBlocks {
             ));
         }};
 
+        darkEnergyGenerator = new DarkEnergyCrafter("dark-energy-generator") {{
+            this.requirements(Category.power, ItemStack.with(
+                    OctoItems.octoMatAlloy, 25,
+                    OctoItems.soul, 40
+            ));
+
+            this.drawer = new DrawMulti(
+                    new DrawRegion("-bottom"),
+                    new DrawBlurSpin("-rotator", 6f),
+                    new DrawDefault()
+            );
+
+            this.size = 3;
+            this.hasPower = true;
+            this.consumePower(3);
+            this.darkEnergyProduce = 0.4f;
+        }};
+
         //end crafters
         //region illegal
 
         illegalItemSource = new IllegalItemSource("illegal-item-source") {{
-            this.requirements(Category.distribution, BuildVisibility.sandboxOnly, ItemStack.with());
+            this.requirements(Category.distribution, BuildVisibility.sandboxOnly, ItemStack.empty);
             this.alwaysUnlocked = true;
         }};
 
         //end illegal
+        //region dark energy
+
+        darkEnergySource = new DarkEnergySource("dark-energy-source") {{
+            this.requirements(Category.power, BuildVisibility.sandboxOnly, ItemStack.empty);
+            this.squareSprite = false;
+        }};
+
+        darkEnergyHole = new DarkEnergyHole("dark-energy-void") {{
+            this.requirements(Category.power, BuildVisibility.sandboxOnly, ItemStack.empty);
+            this.squareSprite = false;
+        }};
+
+        darkEnergyPipe = new DarkEnergyPipe("dark-energy-pipe") {{
+            this.requirements(Category.power, ItemStack.with(
+                    OctoItems.octoMatAlloy, 1
+            ));
+        }};
+
+        //end dark energy
 
         Vars.content.blocks().each(block -> {
             if(block instanceof Turret turret) {

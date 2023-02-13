@@ -28,8 +28,11 @@ public class AmplificationTower extends Block {
     public AmplificationTower(String name) {
         super(name);
 
-        this.solid = this.hasShadow = this.squareSprite = false;
-        this.destructible = this.underBullets = this.update = true;
+        this.solid = this.hasShadow =
+                this.squareSprite = this.targetable = false;
+
+        this.destructible = this.underBullets =
+                this.update = true;
     }
 
     @Override

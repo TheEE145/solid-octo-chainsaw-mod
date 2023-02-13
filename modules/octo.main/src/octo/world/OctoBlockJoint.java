@@ -34,9 +34,11 @@ public class OctoBlockJoint extends Block {
     public OctoBlockJoint(String name) {
         super(name);
 
-        this.destructible = true;
-        this.solid = this.hasShadow = false;
-        this.rotate = this.rotateDraw = this.quickRotate = true;
+        this.solid = this.hasShadow
+                = this.targetable = false;
+
+        this.rotate = this.rotateDraw =
+                this.quickRotate = this.destructible = true;
     }
 
     @Override
