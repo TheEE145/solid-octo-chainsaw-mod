@@ -139,6 +139,6 @@ public @Mod class Octo extends mindustry.mod.Mod implements ApplicationListener 
                     return !str.isEmpty() && !str.startsWith("//");
         });
 
-        ui.research = new ResearchDialog();
+        Core.app.post(() -> ui.research = new ResearchDialog());
     }
 }

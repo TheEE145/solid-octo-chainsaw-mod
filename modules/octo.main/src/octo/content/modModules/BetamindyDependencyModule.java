@@ -90,7 +90,9 @@ public class BetamindyDependencyModule extends ModDependencyModule {
         });
 
         margeNode(this.itemFromMod("cryonite"), () -> {
-            node(bittrium);
+            node(bittrium, () -> {
+                node(this.blockFromMod("bittrium-crystal"));
+            });
         });
 
         //end tech

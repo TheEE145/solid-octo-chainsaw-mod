@@ -1,5 +1,6 @@
 package octo.content;
 
+import arc.struct.Seq;
 import mindustry.Vars;
 import mindustry.content.*;
 
@@ -7,6 +8,7 @@ import mindustry.entities.pattern.ShootAlternate;
 import mindustry.entities.pattern.ShootHelix;
 
 import mindustry.entities.pattern.ShootSpread;
+import mindustry.game.EventType;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 
@@ -16,13 +18,14 @@ import mindustry.world.blocks.defense.turrets.ContinuousLiquidTurret;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.blocks.defense.turrets.Turret;
-import mindustry.world.blocks.power.PowerNode;
 import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.blocks.production.Pump;
 import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.draw.*;
 import mindustry.world.meta.BuildVisibility;
 
+import octo.Octo;
+import octo.core.events.MindustryEventApi;
+import octo.core.util.TechTreeUtils;
 import octo.world.AmplificationTower;
 import octo.world.IllegalItemSource;
 import octo.world.OctoBlockJoint;
@@ -598,6 +601,46 @@ public class OctoBlocks {
                     OctoItems.octoMat, 7
             ));
         }};
+
+        Seq.with(Blocks.copperWall, Blocks.titaniumWall, Blocks.plastaniumWall, Blocks.thoriumWall,
+                Blocks.phaseWall, Blocks.berylliumWall, Blocks.tungstenWall,
+                Blocks.carbideWall, Blocks.reinforcedSurgeWall).forEach(block ->
+        {
+            String name = block.name;
+
+            int len = "-wall".length();
+            if(name.endsWith("-wall")) {
+                name = name.substring(0, name.length() - len);
+            }
+
+            if(name.startsWith("wall-")) {
+                name = name.substring(len);
+            }
+
+            ItemStack[] requirements32 = new ItemStack[block.requirements.length];
+            for(int i = 0; i < requirements32.length; i++) {
+                ItemStack stack = block.requirements[i];
+                requirements32[i] = new ItemStack(stack.item, stack.amount + 1);
+            }
+
+            OctoBlockJoint spike = new OctoBlockJoint(name + "-spike") {{
+                this.mirror = true;
+                this.isSpike = true;
+                this.spikeDamage = 30;
+                this.bulletCollides = false;
+                this.block32 = () -> block;
+                this.requirements(Category.defense, requirements32);
+            }};
+
+            MindustryEventApi.bus
+                    .get(EventType.ClientLoadEvent.class)
+                    .addEventListener(() ->
+            {
+                TechTreeUtils.margeNode(block, () -> {
+                    TechTreeUtils.node(spike);
+                });
+            });
+        });
 
         amplificationTower = new AmplificationTower("amplification-tower") {{
             this.health = 40;
