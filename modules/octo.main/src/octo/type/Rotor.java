@@ -49,7 +49,7 @@ public class Rotor {
     public void load() {
         this.bladeRegion = Regions.getRegion(this.name);
         this.bladeBlurRegion = Regions.getRegion(this.name + "-blur", this.bladeRegion);
-        this.topRegion = Regions.getRegion(this.name + "-top");
+        this.topRegion = Regions.getRegion(this.name + "-top", Regions.getRegion("default-rotor-top"));
 
         this.bladeRegionOutline = Regions.getRegion(this.name + "-outline", this.bladeRegion);
         this.topRegionOutline = Regions.getRegion(this.name + "-top-outline", this.topRegion);

@@ -23,7 +23,7 @@ public class AssetsTransformProcessor {
             for(Fi fi : root.list()) {
                 if(fi.toString().endsWith(".png")) {
                     String name = fi.nameWithoutExtension();
-                    Core.atlas.addRegion(name, Regions.getRegion(name));
+                    Core.atlas.addRegion(mod.name + "-" + name, Regions.getRegion(name));
                 }
             }
         } else {
